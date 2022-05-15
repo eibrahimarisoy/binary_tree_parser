@@ -10,7 +10,7 @@ import (
 )
 
 func Test_handleBinaryTree(t *testing.T) {
-	t.Run("handleBinaryTree_CaseOne", func(t *testing.T) {
+	t.Run("handleBinaryTree_CaseOne_Success", func(t *testing.T) {
 		req, err := http.NewRequest("POST", "/", nil)
 		if err != nil {
 			t.Fatal(err)
@@ -37,7 +37,7 @@ func Test_handleBinaryTree(t *testing.T) {
 		}
 	})
 
-	t.Run("handleBinaryTree_CaseTwo", func(t *testing.T) {
+	t.Run("handleBinaryTree_CaseTwo_Success", func(t *testing.T) {
 		req, err := http.NewRequest("POST", "/", nil)
 		if err != nil {
 			t.Fatal(err)
@@ -65,7 +65,7 @@ func Test_handleBinaryTree(t *testing.T) {
 
 	})
 
-	t.Run("handleBinaryTree_CaseThree", func(t *testing.T) {
+	t.Run("handleBinaryTree_CaseThree_Fault", func(t *testing.T) {
 		req, err := http.NewRequest("POST", "/", nil)
 		if err != nil {
 			t.Fatal(err)
