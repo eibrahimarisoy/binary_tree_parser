@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-type Result struct {
+type Response struct {
 	Sum int `json:"sum"`
 }
 
@@ -37,6 +37,8 @@ func appRouter() http.Handler {
 
 // handleBinaryTree handles the request for the binary tree
 func handleBinaryTree(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("Content-Type", "application/json")
+
 	var p = map[string]interface{}{}
 
 	err := json.NewDecoder(r.Body).Decode(&p)
@@ -53,6 +55,7 @@ func handleBinaryTree(w http.ResponseWriter, r *http.Request) {
 
 	rootNum, err := strconv.Atoi(rootData)
 	if err != nil {
+		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(err)
 		return
@@ -62,11 +65,10 @@ func handleBinaryTree(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		log.Println(err)
-		resp := ErrorResponse{Error: err.Error()}
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(resp)
+		json.NewEncoder(w).Encode(ErrorResponse{Error: err.Error()})
 		return
 	}
-	result := Result{Sum: sum}
+	result := Response{Sum: sum}
 	json.NewEncoder(w).Encode(result)
 }
