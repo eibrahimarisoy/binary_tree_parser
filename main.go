@@ -41,8 +41,7 @@ func handleBinaryTree(w http.ResponseWriter, r *http.Request) {
 
 	var p = map[string]interface{}{}
 
-	err := json.NewDecoder(r.Body).Decode(&p)
-	if err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&p); err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(err)

@@ -42,8 +42,9 @@ func (a NodeArr) maxPathSum(root map[string]interface{}) (ab int, err error) {
 		case nil:
 			left = 0
 		default:
-			log.Println("error 3")
-			return 0, fmt.Errorf("Left Value is not string. value:%v", dataLeft)
+			message := fmt.Sprintf("Left Value is not string. value:%v", dataLeft)
+			log.Printf(message)
+			return 0, fmt.Errorf(message)
 		}
 
 		dataRight := root["right"]
@@ -65,8 +66,9 @@ func (a NodeArr) maxPathSum(root map[string]interface{}) (ab int, err error) {
 		case nil:
 			right = 0
 		default:
-			log.Println("error 6")
-			return 0, fmt.Errorf("Right Value is not string. value:%v", dataRight)
+			message := fmt.Sprintf("Right Value is not string. value:%v", dataRight)
+			log.Printf(message)
+			return 0, fmt.Errorf(message)
 		}
 
 		sum := int(root["value"].(float64)) + left + right
@@ -91,7 +93,7 @@ func (a NodeArr) maxPathSum(root map[string]interface{}) (ab int, err error) {
 	return maxValue, nil
 }
 
-// find returns the node with the given value
+// Find returns the node with the given value
 func (a NodeArr) Find(val int) map[string]interface{} {
 	for i, v := range a {
 		if v.(map[string]interface{})["value"].(float64) == float64(val) {
